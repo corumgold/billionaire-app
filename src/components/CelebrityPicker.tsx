@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { formatCurrency, formatName } from "../helperFuncs";
 
 const apiKey = import.meta.env.VITE_CELEBRITY_API_KEY;
 
 const CelebrityPicker: React.FC = () => {
-  const [celebrityName, setCelebrityName] = useState<string>(""); // State to store the selected celebrity name
-  const [celebrityData, setCelebrityData] = useState<any | null>(null); // State to store the API response
+  const [celebrityName, setCelebrityName] = useState<string>("");
+  const [celebrityData, setCelebrityData] = useState<{ name: string; net_worth: number }[] | null>(null);
+
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      celebrityName && handleFetchCelebrity();
+    }, 500);
+
+    return () => clearTimeout(debounceTimer);
+  }, [celebrityName]);
 
   const handleFetchCelebrity = async () => {
     try {
@@ -23,8 +32,13 @@ const CelebrityPicker: React.FC = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const result = await response.json();
-      setCelebrityData(result);
+        const result = await response.json();
+        
+        const sortedCelebrities = result.sort((a: { name: string; net_worth: number }, b: { name: string; net_worth: number }) =>
+        a.name.localeCompare(b.name)
+      );
+
+      setCelebrityData(sortedCelebrities);
       console.log(result);
     } catch (error) {
       console.error("Error fetching celebrity:", error);
@@ -38,14 +52,14 @@ const CelebrityPicker: React.FC = () => {
         value={celebrityName}
         onChange={(e) => setCelebrityName(e.target.value)}
       />
-      <button onClick={handleFetchCelebrity}>Fetch Celebrity</button>
-
       {celebrityData && (
         <div>
-          {/* Display celebrity data as needed */}
-          <p>Name: {celebrityData[0].name}</p>
-          <p>Net Worth: {celebrityData[0].net_worth}</p>
-          {/* Add other relevant information */}
+          {celebrityData.map((celebrity, index) => (
+            <div key={index}>
+              <p>Name: {formatName(celebrity.name)}</p>
+              <p>Net Worth: {formatCurrency(celebrity.net_worth)}</p>
+            </div>
+          ))}
         </div>
       )}
     </div>
