@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { formatCurrency, formatName } from "../helperFuncs";
+import { useDispatch } from "react-redux";
+import { actions } from "../store/celebritySlice";
 
 const apiKey = import.meta.env.VITE_CELEBRITY_API_KEY;
 
 const CelebrityPicker: React.FC = () => {
   const [celebrityName, setCelebrityName] = useState<string>("");
-  const [celebrityData, setCelebrityData] = useState<{ name: string; net_worth: number }[] | null>(null);
+  const [celebrityData, setCelebrityData] = useState<
+    { name: string; net_worth: number }[] | null
+  >(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
@@ -32,10 +38,13 @@ const CelebrityPicker: React.FC = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-        const result = await response.json();
-        
-        const sortedCelebrities = result.sort((a: { name: string; net_worth: number }, b: { name: string; net_worth: number }) =>
-        a.name.localeCompare(b.name)
+      const result = await response.json();
+
+      const sortedCelebrities = result.sort(
+        (
+          a: { name: string; net_worth: number },
+          b: { name: string; net_worth: number }
+        ) => a.name.localeCompare(b.name)
       );
 
       setCelebrityData(sortedCelebrities);
@@ -43,6 +52,11 @@ const CelebrityPicker: React.FC = () => {
     } catch (error) {
       console.error("Error fetching celebrity:", error);
     }
+  };
+
+  const handleCelebrityClick = (selectedCelebrity: any) => {
+    dispatch(actions.setCelebrityName(selectedCelebrity.name));
+    dispatch(actions.setCelebrityNetWorth(selectedCelebrity.net_worth));
   };
 
   return (
@@ -55,7 +69,7 @@ const CelebrityPicker: React.FC = () => {
       {celebrityData && (
         <div>
           {celebrityData.map((celebrity, index) => (
-            <div key={index}>
+            <div key={index} onClick={() => handleCelebrityClick(celebrity)}>
               <p>Name: {formatName(celebrity.name)}</p>
               <p>Net Worth: {formatCurrency(celebrity.net_worth)}</p>
             </div>
