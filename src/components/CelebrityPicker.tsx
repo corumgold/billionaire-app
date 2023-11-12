@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { formatCurrency, formatName } from "../helperFuncs";
 import { useDispatch } from "react-redux";
-import { actions } from "../store/celebritySlice";
+import { actions as celebrityActions } from "../store/celebritySlice";
+import { actions as userActions } from "../store/userSlice";
 
 const apiKey = import.meta.env.VITE_CELEBRITY_API_KEY;
 
@@ -17,8 +18,10 @@ const CelebrityPicker: React.FC = () => {
     name: string;
     net_worth: number;
   }) => {
-    dispatch(actions.setCelebrityName(selectedCelebrity.name));
-    dispatch(actions.setCelebrityNetWorth(selectedCelebrity.net_worth));
+    dispatch(celebrityActions.setCelebrityName(selectedCelebrity.name));
+    dispatch(
+      celebrityActions.setCelebrityNetWorth(selectedCelebrity.net_worth)
+    );
   };
 
   useEffect(() => {
@@ -80,6 +83,9 @@ const CelebrityPicker: React.FC = () => {
           ))}
         </div>
       )}
+      <button onClick={() => dispatch(userActions.setNetWorth(null))}>
+        Change My Net Worth
+      </button>
     </div>
   );
 };
