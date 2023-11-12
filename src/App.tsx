@@ -8,9 +8,12 @@ import {
 import { formatCurrency, formatName } from "./helperFuncs";
 
 function App() {
-  const selectedCelebrityName = formatName(useSelector(selectCelebrityName));
+  const selectedCelebrityName = formatName(
+    useSelector(selectCelebrityName)?.toString() ?? "Unknown Celebrity"
+  );
+
   const selectedCelebrityNetWorth = formatCurrency(
-    useSelector(selectCelebrityNetWorth)
+    useSelector(selectCelebrityNetWorth) ?? 0
   );
 
   return (
