@@ -4,6 +4,7 @@ import CelebrityPicker from "./components/CelebrityPicker";
 import { selectCelebrityName } from "./store/celebritySlice";
 import { selectNetWorth } from "./store/userSlice";
 import NetWorthInput from "./components/NetWorthInput";
+import WriteUp from "./components/WriteUp";
 
 function App() {
   const selectedCelebrityName = useSelector(selectCelebrityName);
@@ -14,6 +15,7 @@ function App() {
       <h1>Me vs. $B</h1>
       {!userNetWorth && <NetWorthInput />}
       {userNetWorth && !selectedCelebrityName && <CelebrityPicker />}
+      {userNetWorth && selectedCelebrityName && <WriteUp />}
     </>
   );
 }
