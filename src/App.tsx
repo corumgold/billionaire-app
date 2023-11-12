@@ -1,28 +1,19 @@
 import { useSelector } from "react-redux";
 import "./App.css";
 import CelebrityPicker from "./components/CelebrityPicker";
-import {
-  selectCelebrityName,
-  selectCelebrityNetWorth,
-} from "./store/celebritySlice";
-import { formatCurrency, formatName } from "./helperFuncs";
+import { selectCelebrityName } from "./store/celebritySlice";
+import { selectNetWorth } from "./store/userSlice";
+import NetWorthInput from "./components/NetWorthInput";
 
 function App() {
-  const selectedCelebrityName = formatName(
-    useSelector(selectCelebrityName)?.toString() ?? "Unknown Celebrity"
-  );
-
-  const selectedCelebrityNetWorth = formatCurrency(
-    useSelector(selectCelebrityNetWorth) ?? 0
-  );
+  const selectedCelebrityName = useSelector(selectCelebrityName);
+  const userNetWorth = useSelector(selectNetWorth);
 
   return (
     <>
-      <h1> Hello World</h1>
-      <h2>Selected Celebrity: {selectedCelebrityName}</h2>
-      <h2>Selected Celebrity Net Worth: {selectedCelebrityNetWorth}</h2>
-
-      <CelebrityPicker />
+      <h1>Me vs. $B</h1>
+      {!userNetWorth && <NetWorthInput />}
+      {userNetWorth && !selectedCelebrityName && <CelebrityPicker />}
     </>
   );
 }

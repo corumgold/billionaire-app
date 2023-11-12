@@ -64,6 +64,7 @@ const CelebrityPicker: React.FC = () => {
 
   return (
     <div>
+      <h2>Please Select a Celebrity</h2>
       <input
         type="text"
         value={celebrityName}
