@@ -24,7 +24,7 @@ const WriteUp: React.FC = () => {
 
   let celebrityName;
   let itemName;
-  let itemPrice;
+  let itemPrice = 0;
 
   const handleResetGame = () => {
     dispatch(actions.setCelebrityName(null));
