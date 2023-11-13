@@ -20,7 +20,7 @@ const globalStyles: Styles = {
     alignItems: "center",
   },
   backButton: {
-    position: "absolute",
+    position: "fixed",
     top: 0,
     left: 0,
     margin: "1rem",
