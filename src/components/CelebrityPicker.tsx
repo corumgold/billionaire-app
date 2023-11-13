@@ -3,6 +3,7 @@ import { formatCurrency, formatName } from "../helperFuncs";
 import { useDispatch } from "react-redux";
 import { actions as celebrityActions } from "../store/celebritySlice";
 import { actions as userActions } from "../store/userSlice";
+import globalStyles from "../theme/globalStyles";
 
 const apiKey = import.meta.env.VITE_CELEBRITY_API_KEY;
 
@@ -66,27 +67,32 @@ const CelebrityPicker: React.FC = () => {
   }, [celebrityName]);
 
   return (
-    <div>
-      <h2>Please Select a Celebrity</h2>
-      <input
-        type="text"
-        value={celebrityName}
-        onChange={(e) => setCelebrityName(e.target.value)}
-      />
-      {celebrityData && (
-        <div>
-          {celebrityData.map((celebrity, index) => (
-            <div key={index} onClick={() => handleCelebrityClick(celebrity)}>
-              <p>Name: {formatName(celebrity.name)}</p>
-              <p>Net Worth: {formatCurrency(celebrity.net_worth)}</p>
-            </div>
-          ))}
-        </div>
-      )}
-      <button onClick={() => dispatch(userActions.setNetWorth(null))}>
-        Change My Net Worth
+    <>
+      <button
+        style={globalStyles.backButton}
+        onClick={() => dispatch(userActions.setNetWorth(null))}
+      >
+        Back
       </button>
-    </div>
+      <div style={globalStyles.container}>
+        <h2>Please Select a Celebrity</h2>
+        <input
+          type="text"
+          value={celebrityName}
+          onChange={(e) => setCelebrityName(e.target.value)}
+        />
+        {celebrityData && (
+          <div>
+            {celebrityData.map((celebrity, index) => (
+              <div key={index} onClick={() => handleCelebrityClick(celebrity)}>
+                <p>Name: {formatName(celebrity.name)}</p>
+                <p>Net Worth: {formatCurrency(celebrity.net_worth)}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

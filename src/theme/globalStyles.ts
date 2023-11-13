@@ -1,10 +1,11 @@
 interface Styles {
   screen: React.CSSProperties;
   container: React.CSSProperties;
+  backButton: React.CSSProperties;
 }
 
 const globalStyles: Styles = {
-    screen: {
+  screen: {
     top: 0,
     left: 0,
     width: "100vw",
@@ -17,6 +18,12 @@ const globalStyles: Styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  backButton: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    margin: "1rem",
   },
 };
 

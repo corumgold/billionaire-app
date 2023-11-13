@@ -48,7 +48,7 @@ const NetWorthInput: React.FC = () => {
         </button>
       </div>
       <div style={styles.footNote}>
-        <p>
+        <p style={{ textAlign: "center" }}>
           *This is just for fun and the sake of the exercise. Your information
           will not be stored.
         </p>
