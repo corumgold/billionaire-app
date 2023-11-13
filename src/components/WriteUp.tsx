@@ -6,17 +6,25 @@ import {
   selectCelebrityNetWorth,
 } from "../store/celebritySlice";
 import { selectNetWorth } from "../store/userSlice";
-import { formatName, getEmotionalImpactNumber } from "../helperFuncs";
+import {
+  formatCurrency,
+  formatName,
+  getEmotionalImpactNumber,
+} from "../helperFuncs";
 import { useDispatch } from "react-redux";
+import { selectItem } from "../store/itemSlice";
 
 const WriteUp: React.FC = () => {
   const userNetWorth = useSelector(selectNetWorth);
   const selectedCelebrityName = useSelector(selectCelebrityName);
   const selectedCelebrityNetWorth = useSelector(selectCelebrityNetWorth);
+  const selectedItem = useSelector(selectItem);
 
   const dispatch = useDispatch();
 
-  let celebrityName = null;
+  let celebrityName;
+  let itemName;
+  let itemPrice;
 
   const handleResetGame = () => {
     dispatch(actions.setCelebrityName(null));
@@ -27,26 +35,31 @@ const WriteUp: React.FC = () => {
     celebrityName = formatName(selectedCelebrityName);
   }
 
+  if (selectedItem) {
+    itemName = selectedItem.name;
+    itemPrice = selectedItem.price;
+  }
+
   return (
     <div>
       <p>
-        When {celebrityName} purchases an iPhone for $1400, for you this would
-        feel like buying an iPhone for{" "}
+        If {celebrityName} spends {formatCurrency(itemPrice)} on a {itemName},
+        it's like you buying a {itemName} for{" "}
         {getEmotionalImpactNumber(
           selectedCelebrityNetWorth,
           userNetWorth,
-          1400,
+          itemPrice,
           "personal"
         )}
         .
       </p>
       <p>
-        In other words, in order to elicit the same emotional response as you
-        when purchasing an iPhone, {celebrityName} would need to pay{" "}
+        To experience the same feeling as your {formatCurrency(itemPrice)}{" "}
+        {itemName} purchase, {celebrityName} would need to spend{" "}
         {getEmotionalImpactNumber(
           selectedCelebrityNetWorth,
           userNetWorth,
-          1400,
+          itemPrice,
           "celebrity"
         )}
       </p>
