@@ -37,7 +37,6 @@ const NetWorthInput: React.FC = () => {
   return (
     <>
       <div style={globalStyles.container}>
-        <h2>Please Input Your Net Worth*</h2>
         <input
           type="text"
           value={userNetWorth !== null ? userNetWorth : ""}

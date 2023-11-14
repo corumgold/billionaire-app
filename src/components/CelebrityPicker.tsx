@@ -7,6 +7,14 @@ import globalStyles from "../theme/globalStyles";
 
 const apiKey = import.meta.env.VITE_CELEBRITY_API_KEY;
 
+interface Styles {
+  celebrityList: React.CSSProperties;
+}
+
+const styles: Styles = {
+  celebrityList: { maxHeight: "200px", overflowY: "auto", width: "80%" },
+};
+
 const CelebrityPicker: React.FC = () => {
   const [celebrityName, setCelebrityName] = useState<string>("");
   const [celebrityData, setCelebrityData] = useState<
@@ -75,14 +83,13 @@ const CelebrityPicker: React.FC = () => {
         Back
       </button>
       <div style={globalStyles.container}>
-        <h2>Please Select a Celebrity</h2>
         <input
           type="text"
           value={celebrityName}
           onChange={(e) => setCelebrityName(e.target.value)}
         />
         {celebrityData && (
-          <div>
+          <div style={styles.celebrityList}>
             {celebrityData.map((celebrity, index) => (
               <div key={index} onClick={() => handleCelebrityClick(celebrity)}>
                 <p>Name: {formatName(celebrity.name)}</p>

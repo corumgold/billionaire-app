@@ -25,7 +25,6 @@ const ItemPicker: React.FC = () => {
         Back
       </button>
       <div style={globalStyles.container}>
-        <h2>Please Select an Item</h2>
         {items.map((item) => {
           return (
             <button onClick={() => handleItemClick(item)}>
