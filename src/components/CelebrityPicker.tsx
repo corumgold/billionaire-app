@@ -9,10 +9,25 @@ const apiKey = import.meta.env.VITE_CELEBRITY_API_KEY;
 
 interface Styles {
   celebrityList: React.CSSProperties;
+  celebrityListItem: React.CSSProperties;
 }
 
 const styles: Styles = {
-  celebrityList: { maxHeight: "200px", overflowY: "auto", width: "80%" },
+  celebrityList: {
+    display: "flex",
+    flexDirection: "row",
+    overflowX: "auto",
+    maxWidth: "100vw",
+    marginTop: "10px",
+  },
+  celebrityListItem: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "100%",
+    margin: "0 8px",
+  },
 };
 
 const CelebrityPicker: React.FC = () => {
@@ -91,10 +106,18 @@ const CelebrityPicker: React.FC = () => {
         {celebrityData && (
           <div style={styles.celebrityList}>
             {celebrityData.map((celebrity, index) => (
-              <div key={index} onClick={() => handleCelebrityClick(celebrity)}>
-                <p>Name: {formatName(celebrity.name)}</p>
-                <p>Net Worth: {formatCurrency(celebrity.net_worth)}</p>
-              </div>
+              <button
+                style={{
+                  ...styles.celebrityListItem,
+                }}
+                key={index}
+                onClick={() => handleCelebrityClick(celebrity)}
+              >
+                <p style={{ margin: 5 }}>{formatName(celebrity.name)}</p>
+                <p style={{ margin: 5 }}>
+                  {formatCurrency(celebrity.net_worth)}
+                </p>
+              </button>
             ))}
           </div>
         )}
