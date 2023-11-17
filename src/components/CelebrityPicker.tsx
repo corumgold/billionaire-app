@@ -19,6 +19,7 @@ const styles: Styles = {
     overflowX: "auto",
     maxWidth: "100vw",
     marginTop: "10px",
+    minHeight: "150px",
   },
   celebrityListItem: {
     display: "flex",
@@ -103,9 +104,9 @@ const CelebrityPicker: React.FC = () => {
           value={celebrityName}
           onChange={(e) => setCelebrityName(e.target.value)}
         />
-        {celebrityData && (
+        {
           <div style={styles.celebrityList}>
-            {celebrityData.map((celebrity, index) => (
+            {celebrityData?.map((celebrity, index) => (
               <button
                 style={{
                   ...styles.celebrityListItem,
@@ -120,7 +121,7 @@ const CelebrityPicker: React.FC = () => {
               </button>
             ))}
           </div>
-        )}
+        }
       </div>
     </>
   );
