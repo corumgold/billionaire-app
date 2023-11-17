@@ -2,8 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
   actions as celebrityActions,
-  selectCelebrityName,
-  selectCelebrityNetWorth,
+  selectCelebrity,
 } from "../store/celebritySlice";
 import { actions as itemActions } from "../store/itemSlice";
 import { actions as userActions } from "../store/userSlice";
@@ -19,25 +18,25 @@ import globalStyles from "../theme/globalStyles";
 
 const WriteUp: React.FC = () => {
   const userNetWorth = useSelector(selectNetWorth);
-  const selectedCelebrityName = useSelector(selectCelebrityName);
-  const selectedCelebrityNetWorth = useSelector(selectCelebrityNetWorth);
+  const selectedCelebrity = useSelector(selectCelebrity);
   const selectedItem = useSelector(selectItem);
 
   const dispatch = useDispatch();
 
-  let celebrityName;
-  let itemName;
+  let celebrityName = "";
+  let celebrityNetWorth = 0;
+  let itemName = "";
   let itemPrice = 0;
 
   const handleResetGame = () => {
-    dispatch(celebrityActions.setCelebrityName(null));
-    dispatch(celebrityActions.setCelebrityNetWorth(null));
+    dispatch(celebrityActions.setCelebrity(null));
     dispatch(itemActions.setItem(null));
     dispatch(userActions.setNetWorth(null));
   };
 
-  if (selectedCelebrityName) {
-    celebrityName = formatName(selectedCelebrityName);
+  if (selectedCelebrity) {
+    celebrityName = formatName(selectedCelebrity.name);
+    celebrityNetWorth = selectedCelebrity.net_worth;
   }
 
   if (selectedItem) {
@@ -58,7 +57,7 @@ const WriteUp: React.FC = () => {
           If {celebrityName} spends {formatCurrency(itemPrice)} on a {itemName},
           it's like you buying a {itemName} for{" "}
           {getEmotionalImpactNumber(
-            selectedCelebrityNetWorth,
+            celebrityNetWorth,
             userNetWorth,
             itemPrice,
             "personal"
@@ -69,7 +68,7 @@ const WriteUp: React.FC = () => {
           To experience the same feeling as your {formatCurrency(itemPrice)}{" "}
           {itemName} purchase, {celebrityName} would need to spend{" "}
           {getEmotionalImpactNumber(
-            selectedCelebrityNetWorth,
+            celebrityNetWorth,
             userNetWorth,
             itemPrice,
             "celebrity"

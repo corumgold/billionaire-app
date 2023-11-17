@@ -1,34 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CelebrityState {
-  name: null | string;
-  netWorth: null | number;
+  celebrity: null | {
+    name: string;
+    net_worth: number;
+    occupation: string[];
+  };
 }
 
 const initialState: CelebrityState = {
-  name: null,
-  netWorth: null,
+  celebrity: null,
 };
 
 const celebritySlice = createSlice({
   name: "celebrity",
   initialState,
   reducers: {
-    setCelebrityNetWorth: (state, action: PayloadAction<number | null>) => {
-      state.netWorth = action.payload;
-    },
-    setCelebrityName: (state, action: PayloadAction<string | null>) => {
-      state.name = action.payload;
+    setCelebrity: (
+      state,
+      action: PayloadAction<{
+        name: string;
+        net_worth: number;
+        occupation: string[];
+      } | null>
+    ) => {
+      state.celebrity = action.payload;
     },
   },
 });
 
 export const { actions, reducer } = celebritySlice;
 
-export const selectCelebrityName = (state: { celebrity: CelebrityState }) =>
-  state.celebrity.name;
-
-export const selectCelebrityNetWorth = (state: { celebrity: CelebrityState }) =>
-  state.celebrity.netWorth;
+export const selectCelebrity = (state: { celebrity: CelebrityState }) =>
+  state.celebrity.celebrity;
 
 export default celebritySlice.reducer;

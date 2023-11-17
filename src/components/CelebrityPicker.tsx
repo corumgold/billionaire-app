@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { formatCurrency, formatName } from "../helperFuncs";
+import { formatCurrency, formatName, formatOccupation } from "../helperFuncs";
 import { useDispatch } from "react-redux";
 import { actions as celebrityActions } from "../store/celebritySlice";
 import { actions as userActions } from "../store/userSlice";
@@ -7,34 +7,10 @@ import globalStyles from "../theme/globalStyles";
 
 const apiKey = import.meta.env.VITE_CELEBRITY_API_KEY;
 
-interface Styles {
-  celebrityList: React.CSSProperties;
-  celebrityListItem: React.CSSProperties;
-}
-
-const styles: Styles = {
-  celebrityList: {
-    display: "flex",
-    flexDirection: "row",
-    overflowX: "auto",
-    maxWidth: "100vw",
-    marginTop: "10px",
-    minHeight: "150px",
-  },
-  celebrityListItem: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "100%",
-    margin: "0 8px",
-  },
-};
-
 const CelebrityPicker: React.FC = () => {
   const [celebrityName, setCelebrityName] = useState<string>("");
   const [celebrityData, setCelebrityData] = useState<
-    { name: string; net_worth: number }[] | null
+    { name: string; net_worth: number; occupation: string[] }[] | null
   >(null);
 
   const dispatch = useDispatch();
@@ -42,11 +18,9 @@ const CelebrityPicker: React.FC = () => {
   const handleCelebrityClick = (selectedCelebrity: {
     name: string;
     net_worth: number;
+    occupation: string[];
   }) => {
-    dispatch(celebrityActions.setCelebrityName(selectedCelebrity.name));
-    dispatch(
-      celebrityActions.setCelebrityNetWorth(selectedCelebrity.net_worth)
-    );
+    dispatch(celebrityActions.setCelebrity(selectedCelebrity));
   };
 
   useEffect(() => {
@@ -77,7 +51,6 @@ const CelebrityPicker: React.FC = () => {
         );
 
         setCelebrityData(sortedCelebrities);
-        console.log(result);
       } catch (error) {
         console.error("Error fetching celebrity:", error);
       }
@@ -105,19 +78,18 @@ const CelebrityPicker: React.FC = () => {
           onChange={(e) => setCelebrityName(e.target.value)}
         />
         {
-          <div style={styles.celebrityList}>
+          <div style={globalStyles.list}>
             {celebrityData?.map((celebrity, index) => (
               <button
                 style={{
-                  ...styles.celebrityListItem,
+                  ...globalStyles.listItem,
                 }}
                 key={index}
                 onClick={() => handleCelebrityClick(celebrity)}
               >
-                <p style={{ margin: 5 }}>{formatName(celebrity.name)}</p>
-                <p style={{ margin: 5 }}>
-                  {formatCurrency(celebrity.net_worth)}
-                </p>
+                <h3>{formatName(celebrity.name)}</h3>
+                <p>{formatCurrency(celebrity.net_worth)}</p>
+                <p>{formatOccupation(celebrity.occupation)}</p>
               </button>
             ))}
           </div>

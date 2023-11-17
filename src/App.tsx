@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import CelebrityPicker from "./components/CelebrityPicker";
-import { selectCelebrityName } from "./store/celebritySlice";
+import { selectCelebrity } from "./store/celebritySlice";
 import { selectNetWorth } from "./store/userSlice";
 import { selectItem } from "./store/itemSlice";
 import NetWorthInput from "./components/NetWorthInput";
@@ -10,7 +10,7 @@ import globalStyles from "./theme/globalStyles";
 import { useEffect, useState } from "react";
 
 function App() {
-  const selectedCelebrityName = useSelector(selectCelebrityName);
+  const selectedCelebrity = useSelector(selectCelebrity);
   const userNetWorth = useSelector(selectNetWorth);
   const item = useSelector(selectItem);
 
@@ -22,7 +22,7 @@ function App() {
     function handleChangePageText() {
       if (!userNetWorth) {
         setPageText("Please Input Your Net Worth*");
-      } else if (!selectedCelebrityName) {
+      } else if (!selectedCelebrity) {
         setPageText("Please Select a Celebrity");
       } else if (!item) {
         setPageText("Please Select an Item");
@@ -39,9 +39,9 @@ function App() {
       <h1>Me vs. $B</h1>
       <h2>{pageText}</h2>
       {!userNetWorth && <NetWorthInput />}
-      {userNetWorth && !selectedCelebrityName && <CelebrityPicker />}
-      {userNetWorth && selectedCelebrityName && !item && <ItemPicker />}
-      {userNetWorth && selectedCelebrityName && item && <WriteUp />}
+      {userNetWorth && !selectedCelebrity && <CelebrityPicker />}
+      {userNetWorth && selectedCelebrity && !item && <ItemPicker />}
+      {userNetWorth && selectedCelebrity && item && <WriteUp />}
     </div>
   );
 }

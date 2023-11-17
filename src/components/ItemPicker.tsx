@@ -20,7 +20,7 @@ const ItemPicker: React.FC = () => {
     <>
       <button
         style={globalStyles.backButton}
-        onClick={() => dispatch(celebrityActions.setCelebrityName(null))}
+        onClick={() => dispatch(celebrityActions.setCelebrity(null))}
       >
         Back
       </button>

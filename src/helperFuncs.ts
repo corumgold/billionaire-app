@@ -12,6 +12,21 @@ export function formatName(name: string): string {
     .join(" ");
 }
 
+export function formatOccupation(occupation: string[]): string {
+  if (occupation) {
+    const firstThreeOccupations = occupation.slice(0, 3);
+
+    return firstThreeOccupations
+      .map((word) => {
+        const formattedWord = word.replace(/_/g, " ");
+        return formattedWord[0].toUpperCase() + formattedWord.slice(1);
+      })
+      .join(", ");
+  } else {
+    return "";
+  }
+}
+
 export function getEmotionalImpactNumber(
   largerNetWorth: number | null,
   smallerNetWorth: number | null,
