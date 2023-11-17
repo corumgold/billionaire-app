@@ -28,6 +28,7 @@ const globalStyles: Styles = {
     margin: "1rem",
   },
   list: {
+    boxSizing: "border-box",
     display: "flex",
     flexDirection: "row",
     overflowX: "auto",
@@ -37,11 +38,12 @@ const globalStyles: Styles = {
     minWidth: "100%",
   },
   listItem: {
+    boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
     alignItems: "center",
-    minWidth: 200,
+    minWidth: "225px",
     margin: "0 8px",
   },
 };

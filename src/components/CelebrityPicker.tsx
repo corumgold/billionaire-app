@@ -77,23 +77,21 @@ const CelebrityPicker: React.FC = () => {
           value={celebrityName}
           onChange={(e) => setCelebrityName(e.target.value)}
         />
-        {
-          <div style={globalStyles.list}>
-            {celebrityData?.map((celebrity, index) => (
-              <button
-                style={{
-                  ...globalStyles.listItem,
-                }}
-                key={index}
-                onClick={() => handleCelebrityClick(celebrity)}
-              >
-                <h3>{formatName(celebrity.name)}</h3>
-                <p>{formatCurrency(celebrity.net_worth)}</p>
-                <p>{formatOccupation(celebrity.occupation)}</p>
-              </button>
-            ))}
-          </div>
-        }
+        <div style={globalStyles.list}>
+          {celebrityData?.map((celebrity, index) => (
+            <button
+              style={{
+                ...globalStyles.listItem,
+              }}
+              key={index}
+              onClick={() => handleCelebrityClick(celebrity)}
+            >
+              <h3>{formatName(celebrity.name)}</h3>
+              <p>{formatCurrency(celebrity.net_worth)}</p>
+              <p>{formatOccupation(celebrity.occupation)}</p>
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );

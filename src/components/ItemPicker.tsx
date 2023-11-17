@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { actions } from "../store/itemSlice";
 import globalStyles from "../theme/globalStyles";
 import { actions as celebrityActions } from "../store/celebritySlice";
+import { formatCurrency } from "../helperFuncs";
 
 const ItemPicker: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const ItemPicker: React.FC = () => {
   const handleItemClick = (selectedItem: {
     name: string;
     price: number;
-    imageUrl: string;
+    emoji: string;
   }) => {
     dispatch(actions.setItem(selectedItem));
   };
@@ -24,11 +25,19 @@ const ItemPicker: React.FC = () => {
       >
         Back
       </button>
-      <div style={globalStyles.container}>
-        {items.map((item) => {
+      <div style={globalStyles.list}>
+        {items?.map((item, index) => {
           return (
-            <button onClick={() => handleItemClick(item)}>
-              {item.name} {item.price}
+            <button
+              style={{
+                ...globalStyles.listItem,
+              }}
+              key={index}
+              onClick={() => handleItemClick(item)}
+            >
+              <h3>{item.name}</h3>
+              <p style={{fontSize: "3em", margin: 0}}>{item.emoji}</p>
+              <p>{formatCurrency(item.price)}</p>
             </button>
           );
         })}

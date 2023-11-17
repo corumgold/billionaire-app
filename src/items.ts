@@ -1,25 +1,37 @@
 export const items = [
   {
-    name: "iPhone 15",
-    price: 799,
-    imageUrl:
-      "https://freebiehive.com/wp-content/uploads/2023/09/Apple-Iphone-15-Blue-PNG.jpg",
+    name: "High-End Headphones (Bose QC)",
+    price: 350,
+    emoji: "🎧",
   },
   {
-    name: "Mountain Bike",
+    name: "iPhone 15",
+    price: 799,
+    emoji: "📱",
+  },
+  {
+    name: "Nice Weekend Getaway",
     price: 5000,
-    imageUrl: "https://images.excelsports.com/public/large/119270-1.jpg",
+    emoji: "🏖",
+  },
+  {
+    name: "Professional Camera (Canon MKII)",
+    price: 2599,
+    emoji: "📷",
   },
   {
     name: "Used Car (2016 Toyota Carolla)",
     price: 20160,
-    imageUrl:
-      "https://cars.usnews.com/static/images/Auto/izmo/i78657/2016_toyota_corolla_angularfront.jpg",
+    imageUrl: "🚗",
+  },
+  {
+    name: "Luxury Car (New Tesla Model X)",
+    price: 98490,
+    emoji: "🚙",
   },
   {
     name: "3 Bedroom House",
     price: 425000,
-    imageUrl:
-      "https://cdn11.bigcommerce.com/s-g95xg0y1db/images/stencil/1280x1280/o/3%20bedroom%20house%20plan%20-%2025337__35344.original.jpg",
+    emoji: "🏠",
   },
 ];

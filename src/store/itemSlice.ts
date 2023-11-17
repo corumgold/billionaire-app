@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ItemState {
-  item: null | { name: string; price: number; imageUrl: string };
+  item: null | { name: string; price: number; emoji: string };
 }
 
 const initialState: ItemState = {
@@ -17,7 +17,7 @@ const itemSlice = createSlice({
       action: PayloadAction<{
         name: string;
         price: number;
-        imageUrl: string;
+        emoji: string;
       } | null>
     ) => {
       state.item = action.payload;
