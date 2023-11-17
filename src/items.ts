@@ -22,7 +22,7 @@ export const items = [
   {
     name: "Used Car (2016 Toyota Carolla)",
     price: 20160,
-    imageUrl: "🚗",
+    emoji: "🚗",
   },
   {
     name: "Luxury Car (New Tesla Model X)",
