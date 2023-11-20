@@ -27,7 +27,7 @@ function App() {
       } else if (!item) {
         setPageText("Please Select an Item");
       } else {
-        setPageText("");
+        setPageText("Results");
       }
     }
 

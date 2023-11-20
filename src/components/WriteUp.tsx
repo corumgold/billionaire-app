@@ -52,7 +52,13 @@ const WriteUp: React.FC = () => {
       >
         Back
       </button>
-      <div>
+      <div
+        style={{
+          ...globalStyles.container,
+          maxWidth: "90%",
+          textAlign: "center",
+        }}
+      >
         <p>
           If {celebrityName} spends {formatCurrency(itemPrice)} on a {itemName},
           it's like you buying a {itemName} for{" "}
@@ -74,8 +80,8 @@ const WriteUp: React.FC = () => {
             "celebrity"
           )}
         </p>
-        <button onClick={handleResetGame}>Start Over</button>
       </div>
+      <button onClick={handleResetGame}>Start Over</button>
     </>
   );
 };
