@@ -16,8 +16,6 @@ function App() {
 
   const [pageText, setPageText] = useState<string>("");
 
-  console.log(userNetWorth, pageText);
-
   useEffect(() => {
     function handleChangePageText() {
       if (!userNetWorth) {
