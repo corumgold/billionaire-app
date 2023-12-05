@@ -60,25 +60,35 @@ const WriteUp: React.FC = () => {
         }}
       >
         <p>
-          If {celebrityName} spends {formatCurrency(itemPrice)} on a {itemName},
-          it's like you buying a {itemName} for{" "}
-          {getEmotionalImpactNumber(
-            celebrityNetWorth,
-            userNetWorth,
-            itemPrice,
-            "personal"
-          )}
+          If {celebrityName} spends{" "}
+          <span style={globalStyles.spanAccent}>
+            {formatCurrency(itemPrice)}
+          </span>{" "}
+          on a {itemName}, it's like you buying a {itemName} for{" "}
+          <span style={globalStyles.spanAccent}>
+            {getEmotionalImpactNumber(
+              celebrityNetWorth,
+              userNetWorth,
+              itemPrice,
+              "personal"
+            )}
+          </span>
           .
         </p>
         <p>
-          To experience the same feeling as your {formatCurrency(itemPrice)}{" "}
+          To experience the same feeling as your{" "}
+          <span style={globalStyles.spanAccent}>
+            {formatCurrency(itemPrice)}
+          </span>{" "}
           {itemName} purchase, {celebrityName} would need to spend{" "}
-          {getEmotionalImpactNumber(
-            celebrityNetWorth,
-            userNetWorth,
-            itemPrice,
-            "celebrity"
-          )}
+          <span style={globalStyles.spanAccent}>
+            {getEmotionalImpactNumber(
+              celebrityNetWorth,
+              userNetWorth,
+              itemPrice,
+              "celebrity"
+            )}
+          </span>
         </p>
       </div>
       <button onClick={handleResetGame}>Start Over</button>

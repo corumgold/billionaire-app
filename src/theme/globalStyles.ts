@@ -1,9 +1,12 @@
+import appColors from "./colors";
+
 interface Styles {
   screen: React.CSSProperties;
   container: React.CSSProperties;
   backButton: React.CSSProperties;
   list: React.CSSProperties;
   listItem: React.CSSProperties;
+  spanAccent: React.CSSProperties;
 }
 
 const globalStyles: Styles = {
@@ -46,6 +49,9 @@ const globalStyles: Styles = {
     minWidth: "225px",
     margin: "0 8px",
   },
+  spanAccent: {
+    color: appColors.accent,
+  }
 };
 
 export default globalStyles;

@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div style={{ ...globalStyles.screen, ...globalStyles.container }}>
-      <h1>Me vs. $B</h1>
+      <h1>Me vs. <span style={globalStyles.spanAccent}>$B</span></h1>
       <h2>{pageText}</h2>
       {!userNetWorth && <NetWorthInput />}
       {userNetWorth && !selectedCelebrity && <CelebrityPicker />}
