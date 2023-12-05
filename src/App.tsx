@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import globalStyles from "./theme/globalStyles";
 import CelebrityPicker from "./components/CelebrityPicker";
-import { selectCelebrity } from "./store/celebritySlice";
-import { selectNetWorth } from "./store/userSlice";
-import { selectItem } from "./store/itemSlice";
 import NetWorthInput from "./components/NetWorthInput";
 import WriteUp from "./components/WriteUp";
 import ItemPicker from "./components/ItemPicker";
-import globalStyles from "./theme/globalStyles";
-import { useEffect, useState } from "react";
+import { selectCelebrity } from "./store/celebritySlice";
+import { selectNetWorth } from "./store/userSlice";
+import { selectItem } from "./store/itemSlice";
 
 function App() {
   const selectedCelebrity = useSelector(selectCelebrity);
@@ -30,7 +30,7 @@ function App() {
     }
 
     handleChangePageText();
-  });
+  }, [item, selectedCelebrity, userNetWorth]);
 
   return (
     <div style={{ ...globalStyles.screen, ...globalStyles.container }}>
