@@ -10,14 +10,14 @@ export const items = [
     emoji: "📱",
   },
   {
-    name: "Nice Weekend Getaway",
-    price: 5000,
-    emoji: "🏖",
-  },
-  {
     name: "Professional Camera (Canon MKII)",
     price: 2599,
     emoji: "📷",
+  },
+  {
+    name: "Nice Weekend Getaway",
+    price: 5000,
+    emoji: "🏖",
   },
   {
     name: "Used Car (2016 Toyota Carolla)",
