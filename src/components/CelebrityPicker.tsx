@@ -86,8 +86,8 @@ const CelebrityPicker: React.FC = () => {
               key={index}
               onClick={() => handleCelebrityClick(celebrity)}
             >
-              <h3>{formatName(celebrity.name)}</h3>
-              <p>{formatCurrency(celebrity.net_worth)}</p>
+              <h2>{formatName(celebrity.name)}</h2>
+              <h3>{formatCurrency(celebrity.net_worth)}</h3>
               <p>{formatOccupation(celebrity.occupation)}</p>
             </button>
           ))}
