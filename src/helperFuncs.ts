@@ -1,40 +1,39 @@
 export function formatCurrency(amount: number): string {
   let formattedAmount: string;
 
+  const formatOptions = {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  };
+
   if (Math.abs(amount) >= 1e15) {
-    formattedAmount = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
-    }).format(amount / 1e15) + " Quadrillion";
+    formattedAmount =
+      new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e15) +
+      " Quadrillion";
   } else if (Math.abs(amount) >= 1e12) {
-    formattedAmount = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
-    }).format(amount / 1e12) + " Trillion";
+    formattedAmount =
+      new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e12) +
+      " Trillion";
   } else if (Math.abs(amount) >= 1e9) {
-    formattedAmount = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
-    }).format(amount / 1e9) + " Billion";
+    formattedAmount =
+      new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e9) +
+      " Billion";
   } else if (Math.abs(amount) >= 1e6) {
-    formattedAmount = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
-    }).format(amount / 1e6) + " Million";
+    formattedAmount =
+      new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e6) +
+      " Million";
   } else {
     formattedAmount = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 0,
     }).format(amount);
+  }
+
+  if (formattedAmount.includes(".0")) {
+    formattedAmount = formattedAmount.replace(".0", "");
   }
 
   return formattedAmount;
