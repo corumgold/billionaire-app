@@ -87,7 +87,7 @@ const WriteUp: React.FC = () => {
               userNetWorth,
               itemPrice,
               "celebrity"
-            )}
+            )}.
           </span>
         </p>
       </div>

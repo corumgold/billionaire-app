@@ -1,9 +1,43 @@
 export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-  }).format(amount);
+  let formattedAmount: string;
+
+  if (Math.abs(amount) >= 1e15) {
+    formattedAmount = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(amount / 1e15) + " Quadrillion";
+  } else if (Math.abs(amount) >= 1e12) {
+    formattedAmount = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(amount / 1e12) + " Trillion";
+  } else if (Math.abs(amount) >= 1e9) {
+    formattedAmount = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(amount / 1e9) + " Billion";
+  } else if (Math.abs(amount) >= 1e6) {
+    formattedAmount = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(amount / 1e6) + " Million";
+  } else {
+    formattedAmount = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  }
+
+  return formattedAmount;
 }
 
 export function formatName(name: string): string {
