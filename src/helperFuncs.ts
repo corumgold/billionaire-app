@@ -25,10 +25,12 @@ export function formatCurrency(amount: number): string {
       new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e6) +
       " Million";
   } else {
+    const decimalPlaces = amount % 1 !== 0 ? 2 : 0;
+
     formattedAmount = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-      minimumFractionDigits: 0,
+      minimumFractionDigits: decimalPlaces,
     }).format(amount);
   }
 
