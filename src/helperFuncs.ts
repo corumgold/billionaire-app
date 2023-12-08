@@ -4,25 +4,27 @@ export function formatCurrency(amount: number): string {
   const formatOptions = {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   };
 
   if (Math.abs(amount) >= 1e15) {
+    formatOptions.maximumFractionDigits = 0;
     formattedAmount =
       new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e15) +
       " Quadrillion";
   } else if (Math.abs(amount) >= 1e12) {
+    formatOptions.maximumFractionDigits = 0;
     formattedAmount =
       new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e12) +
       " Trillion";
   } else if (Math.abs(amount) >= 1e9) {
-    const billionOptions = { ...formatOptions, maximumFractionDigits: 2 };
-    formattedAmount = new Intl.NumberFormat("en-US", billionOptions).format(amount / 1e9) +
+    formatOptions.maximumFractionDigits = 0;
+    formattedAmount = new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e9) +
       " Billion";
   } else if (Math.abs(amount) >= 1e6) {
-    const millionOptions = { ...formatOptions, maximumFractionDigits: 2 };
-    formattedAmount = new Intl.NumberFormat("en-US", millionOptions).format(amount / 1e6) +
+    formatOptions.maximumFractionDigits = 0;
+    formattedAmount = new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e6) +
       " Million";
   } else {
     const decimalPlaces = Math.abs(amount) < 1 ? 2 : 0;
@@ -32,8 +34,7 @@ export function formatCurrency(amount: number): string {
       minimumFractionDigits: decimalPlaces,
     }).format(amount);
   }
-
-  // Remove ".00" for whole numbers
+  
   if (formattedAmount.includes(".00")) {
     formattedAmount = formattedAmount.replace(".00", "");
   }
