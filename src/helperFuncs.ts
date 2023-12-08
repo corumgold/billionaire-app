@@ -4,8 +4,8 @@ export function formatCurrency(amount: number): string {
   const formatOptions = {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   };
 
   if (Math.abs(amount) >= 1e15) {
@@ -17,29 +17,31 @@ export function formatCurrency(amount: number): string {
       new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e12) +
       " Trillion";
   } else if (Math.abs(amount) >= 1e9) {
-    formattedAmount =
-      new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e9) +
+    const billionOptions = { ...formatOptions, maximumFractionDigits: 2 };
+    formattedAmount = new Intl.NumberFormat("en-US", billionOptions).format(amount / 1e9) +
       " Billion";
   } else if (Math.abs(amount) >= 1e6) {
-    formattedAmount =
-      new Intl.NumberFormat("en-US", formatOptions).format(amount / 1e6) +
+    const millionOptions = { ...formatOptions, maximumFractionDigits: 2 };
+    formattedAmount = new Intl.NumberFormat("en-US", millionOptions).format(amount / 1e6) +
       " Million";
   } else {
-    const decimalPlaces = amount % 1 !== 0 ? 2 : 0;
+    const decimalPlaces = Math.abs(amount) < 1 ? 2 : 0;
 
     formattedAmount = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
+      ...formatOptions,
       minimumFractionDigits: decimalPlaces,
     }).format(amount);
   }
 
-  if (formattedAmount.includes(".0")) {
-    formattedAmount = formattedAmount.replace(".0", "");
+  // Remove ".00" for whole numbers
+  if (formattedAmount.includes(".00")) {
+    formattedAmount = formattedAmount.replace(".00", "");
   }
 
   return formattedAmount;
 }
+
+
 
 export function formatName(name: string): string {
   return name
@@ -81,6 +83,7 @@ export function getEmotionalImpactNumber(
 
   if (personalOrCeleb === "personal") {
     const emotionalImpactNumber = itemPrice / netWorthRatio;
+    console.log(emotionalImpactNumber)
     if (emotionalImpactNumber < 0.01) {
       return "less than a penny";
     } else return formatCurrency(emotionalImpactNumber);
